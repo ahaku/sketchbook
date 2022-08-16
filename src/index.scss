@@ -16,11 +16,13 @@ html,
 body[data-theme="light"] {
   --primary: #212121;
   --background: white;
+  --sidebar-background: #ccc;
 }
 
 body[data-theme="dark"] {
   --primary: white;
   --background: #212121;
+  --sidebar-background: #333;
 }
 body {
   color: var(--primary);

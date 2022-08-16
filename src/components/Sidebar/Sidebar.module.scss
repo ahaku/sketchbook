@@ -1,6 +1,6 @@
 .sidebar {
   width: 40%; // todo: make this dynamic
   height: 100%;
-  background-color: rgb(31, 31, 31);
+  background-color: var(--sidebar-background);
   position: absolute;
 }

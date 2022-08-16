@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const useLocalStorage = <V>(
   key: string,
-  defaultValue?: V,
+  defaultValue: V | string = "",
   { serialize = JSON.stringify, deserialize = JSON.parse } = {}
 ): [V, (value: V) => void] => {
   const [state, setState] = useState<V>(() => {

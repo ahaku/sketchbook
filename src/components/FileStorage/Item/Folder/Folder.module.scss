@@ -1,0 +1,33 @@
+.folder {
+  padding-left: 10px;
+  font-weight: bold;
+
+  .header {
+    display: flex;
+
+    &:hover {
+      .actions {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  .actions {
+    margin-left: 4px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .name {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.expanded {
+  display: block;
+}
+.collapsed {
+  display: none;
+}

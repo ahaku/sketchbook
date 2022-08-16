@@ -6,7 +6,7 @@ import HomePage from "../HomePage";
 import Sidebar from "../Sidebar";
 
 function App() {
-  const [theme] = useLocalStorage<Theme>("theme");
+  const [theme] = useLocalStorage<Theme>("theme", "light");
   useEffect(() => {
     document.body.dataset.theme = theme;
   }, [theme]);
