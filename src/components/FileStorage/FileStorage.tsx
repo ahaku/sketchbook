@@ -1,49 +1,38 @@
-import { useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { STORAGE_KEY } from "../../constants";
+import db from "../../db";
+import { updateStorage } from "../../db/db";
 import { StorageItem } from "../../types";
 import { add, edit, remove } from "./helpers";
 import FileStorageItem from "./Item";
 
-const items: StorageItem[] = [
-  {
-    id: "1",
-    name: "src",
-    isFolder: true,
-    children: [
-      {
-        id: "2",
-        name: "file_1.txt",
-        isFolder: false,
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "another_file.txt",
-    isFolder: false,
-  },
-];
-
 const FileStorage = () => {
-  const [fileSystem, setFileSystem] = useState(() => items);
+  const storage = useLiveQuery(() => db.storage.get(STORAGE_KEY));
 
   const addItem = (parentId: string, itemToAdd: StorageItem) => {
-    const newItems = add(fileSystem, parentId, itemToAdd);
-    setFileSystem(newItems);
+    if (storage) {
+      const newItems = add(storage, parentId, itemToAdd);
+      updateStorage(newItems);
+    }
   };
 
   const editItem = (itemId: string, patch: Partial<StorageItem>) => {
-    const newItems = edit(fileSystem, itemId, patch);
-    setFileSystem(newItems);
+    if (storage) {
+      const newItems = edit(storage, itemId, patch);
+      updateStorage(newItems);
+    }
   };
 
   const removeItem = (itemId: string) => {
-    const newItems = remove(fileSystem, itemId);
-    setFileSystem(newItems);
+    if (storage) {
+      const newItems = remove(storage, itemId);
+      updateStorage(newItems);
+    }
   };
 
   return (
     <div>
-      {fileSystem.map((item) => {
+      {storage?.map((item) => {
         return (
           <FileStorageItem
             key={item.id}

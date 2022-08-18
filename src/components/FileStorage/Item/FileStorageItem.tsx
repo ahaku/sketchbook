@@ -16,7 +16,7 @@ const FileStorageItem = ({
   editItem,
   removeItem,
 }: FileStorageItemProps) => {
-  const { name, isFolder, id } = item;
+  const { isFolder } = item;
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
