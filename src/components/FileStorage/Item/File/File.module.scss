@@ -1,4 +1,28 @@
 .file {
   padding-left: 10px;
   font-weight: normal;
+  display: flex;
+  width: max-content;
+
+  .name {
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    .actions {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .actions {
+    margin-left: 4px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
 }

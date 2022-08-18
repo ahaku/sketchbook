@@ -23,7 +23,7 @@ const FileStorageItem = ({
   };
 
   if (!isFolder) {
-    return <File item={item} />;
+    return <File item={item} editItem={editItem} removeItem={removeItem} />;
   }
 
   return (

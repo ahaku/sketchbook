@@ -4,6 +4,7 @@ import { useLocalStorage } from "../../hooks";
 import { Theme } from "../../types";
 import HomePage from "../HomePage";
 import Sidebar from "../Sidebar";
+import SketchPage from "../SketchPage";
 
 function App() {
   const [theme] = useLocalStorage<Theme>("theme", "light");
@@ -15,6 +16,7 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/:sketchName" element={<SketchPage />} />
       </Routes>
     </>
   );
