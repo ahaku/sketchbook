@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import db from "../../../../db";
 import { StorageItem } from "../../../../types";
 import s from "./File.module.scss";
 
@@ -16,13 +17,14 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
     editItem(id, { name: itemName || name });
   };
   const onRemove = () => {
+    db.sketches.where("fileId").equals(id).delete();
     removeItem(id);
   };
 
   return (
     <div className={s.file}>
       <div className={s.name}>
-        <Link to={`/${name}`}>{name}</Link>
+        <Link to={`/${id}`}>{name}</Link>
       </div>
       <div className={s.actions}>
         <button onClick={onEdit}>e</button>

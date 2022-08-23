@@ -16,7 +16,7 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/:sketchName" element={<SketchPage />} />
+        <Route path="/:sketchId" element={<SketchPage />} />
       </Routes>
     </>
   );

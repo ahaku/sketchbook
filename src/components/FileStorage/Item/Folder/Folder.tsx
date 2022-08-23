@@ -1,3 +1,4 @@
+import db from "../../../../db";
 import { uuidv4 } from "../../../../helpers/utils";
 import { StorageItem } from "../../../../types";
 import FileStorageItem from "../FileStorageItem";
@@ -20,7 +21,7 @@ const Folder = ({
   editItem,
   removeItem,
 }: FolderProps) => {
-  const { name, children } = item;
+  const { name, children, path, id } = item;
 
   const sortedChildren = [...(children || [])].sort((a) => {
     return a.isFolder ? -1 : 1;
@@ -34,6 +35,13 @@ const Folder = ({
       name: itemName || new Date().getTime().toString(),
       isFolder,
     };
+    if (!isFolder) {
+      db.sketches.add({
+        fileId: newItem.id,
+        path: [...(path || []), id],
+        data: [],
+      });
+    }
     addItem(item.id, newItem);
   };
 
@@ -45,6 +53,7 @@ const Folder = ({
 
   const onRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
+    db.sketches.where("path").anyOf(id).delete();
     removeItem(item.id);
   };
 

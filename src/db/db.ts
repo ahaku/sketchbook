@@ -1,31 +1,50 @@
 import Dexie, { Table, Transaction } from "dexie";
-import { DBNames, STORAGE_KEY } from "../constants";
+import { DBNames, DB_NAME, STORAGE_KEY } from "../constants";
 import { uuidv4 } from "../helpers/utils";
-import { StorageItem } from "../types";
+import { Sketch, StorageItem } from "../types";
 
 export class Database extends Dexie {
   [DBNames.storage]!: Table<StorageItem[]>;
+  [DBNames.sketches]!: Table<Sketch>;
 
   constructor() {
-    super(DBNames.storage);
+    super(DB_NAME);
     this.version(1).stores({
       [DBNames.storage]: "",
+      [DBNames.sketches]: "++id, fileId, *path",
     });
     this._populate();
   }
 
   private _populate() {
+    const folderId = uuidv4();
+    const fileId = uuidv4();
     this.on("populate", (tx: Transaction) => {
       tx.table(DBNames.storage).add(
         [
           {
-            id: uuidv4(),
+            id: folderId,
             name: "root",
             isFolder: true,
+            path: [],
+            children: [
+              {
+                id: fileId,
+                name: "example.sketch",
+                isFolder: false,
+                path: [folderId],
+              },
+            ],
           },
         ],
         STORAGE_KEY
       );
+
+      tx.table(DBNames.sketches).add({
+        fileId,
+        path: [folderId],
+        data: [],
+      });
     });
   }
 }
