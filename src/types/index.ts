@@ -1,3 +1,6 @@
+import { ExcalidrawElement } from "@excalidraw/excalidraw/types/element/types";
+import { AppState } from "@excalidraw/excalidraw/types/types";
+
 export type Theme = "light" | "dark";
 
 export interface StorageItem {
@@ -8,8 +11,13 @@ export interface StorageItem {
   path?: string[];
 }
 
+export interface SketchData {
+  elements: readonly ExcalidrawElement[];
+  appState: Partial<AppState>;
+}
+
 export interface Sketch {
   fileId: string;
   path: string[];
-  data: any[];
+  data: SketchData;
 }

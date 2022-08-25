@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import db from "../../../../db";
 import { StorageItem } from "../../../../types";
 import s from "./File.module.scss";
@@ -11,6 +11,8 @@ interface FileProps {
 
 const File = ({ item, editItem, removeItem }: FileProps) => {
   const { name, id } = item;
+  const location = useLocation();
+  const active = location?.pathname.endsWith(id);
 
   const onEdit = () => {
     const itemName = prompt("Enter file name", name);
@@ -23,7 +25,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
 
   return (
     <div className={s.file}>
-      <div className={s.name}>
+      <div className={`${s.name} ${active ? s.active : ""}`}>
         <Link to={`/${id}`}>{name}</Link>
       </div>
       <div className={s.actions}>

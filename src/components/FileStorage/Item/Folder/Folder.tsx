@@ -1,27 +1,32 @@
 import db from "../../../../db";
 import { uuidv4 } from "../../../../helpers/utils";
+import { useLocalStorage } from "../../../../hooks";
 import { StorageItem } from "../../../../types";
 import FileStorageItem from "../FileStorageItem";
 import s from "./Folder.module.scss";
 
 interface FolderProps {
   item: StorageItem;
-  expanded: boolean;
-  toggleExpand: () => void;
   addItem: (parentId: string, itemToAdd: StorageItem) => void;
   editItem: (itemId: string, patch: Partial<StorageItem>) => void;
   removeItem: (itemId: string) => void;
 }
 
-const Folder = ({
-  item,
-  expanded,
-  toggleExpand,
-  addItem,
-  editItem,
-  removeItem,
-}: FolderProps) => {
+const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   const { name, children, path, id } = item;
+
+  const [expandedFolders, setExpandedFolders] = useLocalStorage<string[]>(
+    "expanded-folders",
+    []
+  );
+  const isExpanded = expandedFolders?.includes(id);
+  const toggleFolderExpand = () => {
+    if (isExpanded) {
+      setExpandedFolders(expandedFolders.filter((folderId) => folderId !== id));
+    } else {
+      setExpandedFolders([...expandedFolders, id]);
+    }
+  };
 
   const sortedChildren = [...(children || [])].sort((a) => {
     return a.isFolder ? -1 : 1;
@@ -39,7 +44,10 @@ const Folder = ({
       db.sketches.add({
         fileId: newItem.id,
         path: [...(path || []), id],
-        data: [],
+        data: {
+          elements: [],
+          appState: {},
+        },
       });
     }
     addItem(item.id, newItem);
@@ -60,7 +68,7 @@ const Folder = ({
   return (
     <div className={s.folder}>
       <div className={s.header}>
-        <div onClick={toggleExpand} className={s.name}>
+        <div onClick={toggleFolderExpand} className={s.name}>
           {name}
         </div>
         <div className={s.actions}>
@@ -70,7 +78,7 @@ const Folder = ({
           <button onClick={onRemove}>r</button>
         </div>
       </div>
-      <div className={`${expanded ? s.expanded : s.collapsed}`}>
+      <div className={`${isExpanded ? s.expanded : s.collapsed}`}>
         {sortedChildren.map((item) => {
           return (
             <FileStorageItem

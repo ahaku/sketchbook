@@ -43,7 +43,10 @@ export class Database extends Dexie {
       tx.table(DBNames.sketches).add({
         fileId,
         path: [folderId],
-        data: [],
+        data: {
+          elements: [],
+          appState: {},
+        },
       });
     });
   }
