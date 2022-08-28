@@ -5,9 +5,11 @@ import { Excalidraw } from "@excalidraw/excalidraw";
 import db from "../../db";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SketchData } from "../../types";
+import { useThemeContext } from "../../theme/ThemeContext";
 
 const SketchPage = () => {
   const { sketchId } = useParams();
+  const { theme } = useThemeContext();
   const [loading, setLoading] = useState(true);
   const excalidrawRef = useRef(null);
   const dataRef = useRef<SketchData>({ elements: [], appState: {} });
@@ -70,7 +72,7 @@ const SketchPage = () => {
       <div className={s.excalidraWrapper}>
         <Excalidraw
           ref={excalidrawRef}
-          theme="dark"
+          theme={theme}
           initialData={{
             elements: sketch?.data.elements,
             appState: sketch?.data.appState,

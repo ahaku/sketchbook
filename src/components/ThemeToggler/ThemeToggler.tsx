@@ -1,8 +1,7 @@
-import { useLocalStorage } from "../../hooks";
-import { Theme } from "../../types";
+import { useThemeContext } from "../../theme/ThemeContext";
 
 const ThemeToggler = () => {
-  const [theme, setTheme] = useLocalStorage<Theme>("theme", "light");
+  const { theme, setTheme } = useThemeContext();
   const nextTheme = theme === "light" ? "dark" : "light";
 
   return (
