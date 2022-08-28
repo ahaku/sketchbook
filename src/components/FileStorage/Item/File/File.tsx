@@ -18,11 +18,13 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   const location = useLocation();
   const active = location?.pathname.endsWith(id);
 
-  const onEdit = () => {
+  const onEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const itemName = prompt("Enter file name", name);
     editItem(id, { name: itemName || name });
   };
-  const onRemove = () => {
+  const onRemove = (e: React.MouseEvent) => {
+    e.stopPropagation();
     db.sketches.where("fileId").equals(id).delete();
     removeItem(id);
   };
