@@ -4,6 +4,15 @@
   display: flex;
   justify-content: space-between;
 
+  .header {
+    display: flex;
+    .icon {
+      margin-right: 4px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
   .name {
     a {
       text-decoration: none;

@@ -4,6 +4,11 @@ import { useLocalStorage } from "../../../../hooks";
 import { StorageItem } from "../../../../types";
 import FileStorageItem from "../FileStorageItem";
 import s from "./Folder.module.scss";
+import { FaFolderOpen, FaFolder } from "react-icons/fa";
+import RemoveIcon from "../../../common/RemoveIcon";
+import EditIcon from "../../../common/EditIcon";
+import AddFileIcon from "../../../common/AddFileIcon";
+import AddFolderIcon from "../../../common/AddFolderIcon";
 
 interface FolderProps {
   item: StorageItem;
@@ -68,14 +73,17 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   return (
     <div className={s.folder}>
       <div onClick={toggleFolderExpand} className={s.header}>
-        <div className={s.name}>
-          {isExpanded ? "↓" : "↑"} {name}
+        <div className={s.info}>
+          <div className={s.icon}>
+            {isExpanded ? <FaFolderOpen /> : <FaFolder />}
+          </div>
+          <span>{name}</span>
         </div>
         <div className={s.actions}>
-          <button onClick={onAdd}>+</button>
-          <button onClick={(e) => onAdd(e, false)}>f</button>
-          <button onClick={onEdit}>e</button>
-          <button onClick={onRemove}>r</button>
+          <AddFolderIcon onClick={onAdd} />
+          <AddFileIcon onClick={(e) => onAdd(e, false)} />
+          <EditIcon onClick={onEdit} />
+          <RemoveIcon onClick={onRemove} />
         </div>
       </div>
       <div className={`${isExpanded ? s.expanded : s.collapsed}`}>

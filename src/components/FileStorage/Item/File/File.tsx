@@ -1,7 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import db from "../../../../db";
 import { StorageItem } from "../../../../types";
+import { BsCardImage } from "react-icons/bs";
 import s from "./File.module.scss";
+import EditIcon from "../../../common/EditIcon";
+import RemoveIcon from "../../../common/RemoveIcon";
 
 interface FileProps {
   item: StorageItem;
@@ -29,10 +32,15 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
 
   return (
     <div onClick={onClick} className={s.file}>
-      <div className={`${s.name} ${active ? s.active : ""}`}>{name}</div>
+      <div className={s.header}>
+        <div className={s.icon}>
+          <BsCardImage />
+        </div>
+        <div className={`${s.name} ${active ? s.active : ""}`}>{name}</div>
+      </div>
       <div className={s.actions}>
-        <button onClick={onEdit}>e</button>
-        <button onClick={onRemove}>r</button>
+        <EditIcon onClick={onEdit} />
+        <RemoveIcon onClick={onRemove} />
       </div>
     </div>
   );
