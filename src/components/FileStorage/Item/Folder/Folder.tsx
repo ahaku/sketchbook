@@ -67,9 +67,9 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
 
   return (
     <div className={s.folder}>
-      <div className={s.header}>
-        <div onClick={toggleFolderExpand} className={s.name}>
-          {name}
+      <div onClick={toggleFolderExpand} className={s.header}>
+        <div className={s.name}>
+          {isExpanded ? "↓" : "↑"} {name}
         </div>
         <div className={s.actions}>
           <button onClick={onAdd}>+</button>

@@ -6,6 +6,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }
 body,
 html,
@@ -15,14 +20,18 @@ html,
 }
 body[data-theme="light"] {
   --primary: #212121;
+  --text-hover: #313131;
   --background: white;
-  --sidebar-background: #ccc;
+  --sidebar-background: #cccccce3;
+  --sidebar-button: rgb(156, 156, 156);
 }
 
 body[data-theme="dark"] {
-  --primary: white;
+  --primary: rgb(221, 221, 221);
+  --text-hover: white;
   --background: #212121;
-  --sidebar-background: #333;
+  --sidebar-background: #333333e3;
+  --sidebar-button: #1d1d1d;
 }
 body {
   color: var(--primary);

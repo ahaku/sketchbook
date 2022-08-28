@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import db from "../../../../db";
 import { StorageItem } from "../../../../types";
 import s from "./File.module.scss";
@@ -10,6 +10,7 @@ interface FileProps {
 }
 
 const File = ({ item, editItem, removeItem }: FileProps) => {
+  const navigate = useNavigate();
   const { name, id } = item;
   const location = useLocation();
   const active = location?.pathname.endsWith(id);
@@ -22,12 +23,13 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
     db.sketches.where("fileId").equals(id).delete();
     removeItem(id);
   };
+  const onClick = () => {
+    navigate(`/${id}`);
+  };
 
   return (
-    <div className={s.file}>
-      <div className={`${s.name} ${active ? s.active : ""}`}>
-        <Link to={`/${id}`}>{name}</Link>
-      </div>
+    <div onClick={onClick} className={s.file}>
+      <div className={`${s.name} ${active ? s.active : ""}`}>{name}</div>
       <div className={s.actions}>
         <button onClick={onEdit}>e</button>
         <button onClick={onRemove}>r</button>

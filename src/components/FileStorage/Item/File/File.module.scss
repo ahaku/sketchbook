@@ -2,7 +2,7 @@
   padding-left: 10px;
   font-weight: normal;
   display: flex;
-  width: max-content;
+  justify-content: space-between;
 
   .name {
     a {
@@ -16,6 +16,7 @@
 
   &:hover {
     cursor: pointer;
+    color: var(--text-hover);
     .actions {
       visibility: visible;
       opacity: 1;
@@ -23,6 +24,10 @@
   }
 
   .actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 4px;
+    margin: 0 4px;
     margin-left: 4px;
     visibility: hidden;
     opacity: 0;

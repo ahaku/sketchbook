@@ -5,6 +5,7 @@ import { updateStorage } from "../../db/db";
 import { StorageItem } from "../../types";
 import { add, edit, remove } from "./helpers";
 import FileStorageItem from "./Item";
+import s from "./FileStorage.module.scss";
 
 const FileStorage = () => {
   const storage = useLiveQuery(() => db.storage.get(STORAGE_KEY));
@@ -31,7 +32,7 @@ const FileStorage = () => {
   };
 
   return (
-    <div>
+    <div className={s.fileStorage}>
       {storage?.map((item) => {
         return (
           <FileStorageItem

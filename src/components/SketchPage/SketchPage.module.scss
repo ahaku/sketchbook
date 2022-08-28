@@ -1,9 +1,9 @@
 .sketchPage {
   display: grid;
-  place-items: center;
+  place-items: end;
   height: 100%;
   .excalidraWrapper {
-    width: 80%;
+    width: calc(100% - 18px);
     height: 100%;
   }
 }

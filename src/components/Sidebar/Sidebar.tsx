@@ -1,9 +1,15 @@
+import { useLocalStorage } from "../../hooks";
 import FileStorage from "../FileStorage";
 import s from "./Sidebar.module.scss";
 const Sidebar = () => {
+  const [expanded, setExpanded] = useLocalStorage("sidebar-expanded", true);
   return (
-    <div className={s.sidebar}>
+    <div className={`${s.sidebar} ${expanded ? s.expanded : s.collapsed}`}>
       <FileStorage />
+
+      <div className={s.sidebarToggle} onClick={() => setExpanded(!expanded)}>
+        <span>{expanded ? "HIDE" : "FILES"}</span>
+      </div>
     </div>
   );
 };
