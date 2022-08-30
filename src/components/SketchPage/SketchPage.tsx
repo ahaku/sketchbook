@@ -6,10 +6,16 @@ import db from "../../db";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SketchData } from "../../types";
 import { useThemeContext } from "../../theme/ThemeContext";
+import { LibraryItems } from "@excalidraw/excalidraw/types/types";
+import { useLocalStorage } from "../../hooks";
 
 const SketchPage = () => {
   const { sketchId } = useParams();
   const { theme } = useThemeContext();
+  const [libraryItems, setLibraryItems] = useLocalStorage<LibraryItems>(
+    "library-items",
+    []
+  );
   const [loading, setLoading] = useState(true);
   const excalidrawRef = useRef(null);
   const dataRef = useRef<SketchData>({ elements: [], appState: {}, files: {} });
@@ -78,9 +84,13 @@ const SketchPage = () => {
             elements: sketch?.data.elements,
             appState: sketch?.data.appState,
             files: sketch?.data.files,
+            libraryItems,
           }}
           onChange={(elements, state, files) => {
             dataRef.current = { elements, appState: state, files };
+          }}
+          onLibraryChange={(items) => {
+            setLibraryItems(items);
           }}
           // onPointerUpdate={(payload) => console.log(payload)}
           // viewModeEnabled={viewModeEnabled}
