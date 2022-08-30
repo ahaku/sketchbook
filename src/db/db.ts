@@ -46,6 +46,7 @@ export class Database extends Dexie {
         data: {
           elements: [],
           appState: {},
+          files: {},
         },
       });
     });

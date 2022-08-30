@@ -12,7 +12,7 @@ const SketchPage = () => {
   const { theme } = useThemeContext();
   const [loading, setLoading] = useState(true);
   const excalidrawRef = useRef(null);
-  const dataRef = useRef<SketchData>({ elements: [], appState: {} });
+  const dataRef = useRef<SketchData>({ elements: [], appState: {}, files: {} });
   const sketch = useLiveQuery(async () => {
     setLoading(true);
     const result = await db.sketches
@@ -40,6 +40,7 @@ const SketchPage = () => {
           data: {
             elements: dataRef.current.elements,
             appState: dataRef.current.appState,
+            files: dataRef.current.files,
           },
         });
   }, [sketchId]);
@@ -76,11 +77,10 @@ const SketchPage = () => {
           initialData={{
             elements: sketch?.data.elements,
             appState: sketch?.data.appState,
+            files: sketch?.data.files,
           }}
-          onChange={(elements, state) => {
-            dataRef.current = { elements, appState: state };
-            // setElements(elements);
-            // setDrawState(state);
+          onChange={(elements, state, files) => {
+            dataRef.current = { elements, appState: state, files };
           }}
           // onPointerUpdate={(payload) => console.log(payload)}
           // viewModeEnabled={viewModeEnabled}

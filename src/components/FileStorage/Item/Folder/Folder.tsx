@@ -52,6 +52,7 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
         data: {
           elements: [],
           appState: {},
+          files: {},
         },
       });
     }

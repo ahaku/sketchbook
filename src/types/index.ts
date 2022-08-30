@@ -1,5 +1,5 @@
 import { ExcalidrawElement } from "@excalidraw/excalidraw/types/element/types";
-import { AppState } from "@excalidraw/excalidraw/types/types";
+import { AppState, BinaryFiles } from "@excalidraw/excalidraw/types/types";
 
 export type Theme = "light" | "dark";
 
@@ -14,6 +14,7 @@ export interface StorageItem {
 export interface SketchData {
   elements: readonly ExcalidrawElement[];
   appState: Partial<AppState>;
+  files: BinaryFiles;
 }
 
 export interface Sketch {
