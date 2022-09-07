@@ -1,11 +1,13 @@
 .file {
-  padding-left: 10px;
+  padding-left: var(--item-padding);
   font-weight: normal;
   display: flex;
+  flex-basis: 100%;
   justify-content: space-between;
 
   .header {
     display: flex;
+    flex: 1;
     .icon {
       margin-right: 4px;
       display: flex;
@@ -14,6 +16,7 @@
   }
 
   .name {
+    flex: 1;
     a {
       text-decoration: none;
       color: inherit;
@@ -37,8 +40,7 @@
     grid-auto-flow: column;
     align-items: center;
     gap: 4px;
-    margin: 0 4px;
-    margin-left: 4px;
+    margin: 0px 4px 0px 10px;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;

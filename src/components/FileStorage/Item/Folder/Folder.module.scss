@@ -1,5 +1,5 @@
 .folder {
-  padding-left: 10px;
+  padding-left: var(--item-padding);
 
   .header {
     display: flex;
@@ -7,12 +7,12 @@
 
     .info {
       display: flex;
-      align-items: center;
-      align-content: center;
-      text-align: center;
+      flex: 1;
+      height: 20px;
       .icon {
         display: flex;
         margin-right: 4px;
+        align-items: flex-end;
       }
     }
 
@@ -31,10 +31,16 @@
     grid-auto-flow: column;
     align-items: center;
     gap: 4px;
-    margin: 0 4px;
+    margin: 0px 4px 0px 10px;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .newItem {
+    display: flex;
+    flex: 1;
+    padding-left: var(--item-padding);
+    padding-right: var(--item-padding);
   }
 }
 

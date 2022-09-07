@@ -5,6 +5,8 @@ import { BsCardImage } from "react-icons/bs";
 import s from "./File.module.scss";
 import EditIcon from "../../../common/EditIcon";
 import RemoveIcon from "../../../common/RemoveIcon";
+import { useState } from "react";
+import NameInput from "../../../common/NameInput";
 
 interface FileProps {
   item: StorageItem;
@@ -17,11 +19,11 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   const { name, id } = item;
   const location = useLocation();
   const active = location?.pathname.endsWith(id);
+  const [showInput, setShowInput] = useState<boolean>(false);
 
-  const onEdit = (e: React.MouseEvent) => {
+  const onEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const itemName = prompt("Enter file name", name);
-    editItem(id, { name: itemName || name });
+    setShowInput(true);
   };
   const onRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -31,6 +33,13 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   const onClick = () => {
     navigate(`/${id}`);
   };
+  const onNameChange = (value: string) => {
+    setShowInput(false);
+    editItem(id, { name: value || name });
+  };
+  const onCancel = () => {
+    setShowInput(false);
+  };
 
   return (
     <div onClick={onClick} className={s.file}>
@@ -38,10 +47,20 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
         <div className={s.icon}>
           <BsCardImage />
         </div>
-        <div className={`${s.name} ${active ? s.active : ""}`}>{name}</div>
+        <div className={`${s.name} ${active ? s.active : ""}`}>
+          {showInput ? (
+            <NameInput
+              onNameChange={onNameChange}
+              onCancel={onCancel}
+              defaultValue={name}
+            />
+          ) : (
+            name
+          )}
+        </div>
       </div>
       <div className={s.actions}>
-        <EditIcon onClick={onEdit} />
+        <EditIcon onClick={onEditClick} />
         <RemoveIcon onClick={onRemove} />
       </div>
     </div>

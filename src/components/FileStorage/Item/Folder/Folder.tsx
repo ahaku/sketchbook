@@ -9,6 +9,8 @@ import RemoveIcon from "../../../common/RemoveIcon";
 import EditIcon from "../../../common/EditIcon";
 import AddFileIcon from "../../../common/AddFileIcon";
 import AddFolderIcon from "../../../common/AddFolderIcon";
+import { useState } from "react";
+import NameInput from "../../../common/NameInput";
 
 interface FolderProps {
   item: StorageItem;
@@ -16,10 +18,19 @@ interface FolderProps {
   editItem: (itemId: string, patch: Partial<StorageItem>) => void;
   removeItem: (itemId: string) => void;
 }
+interface CreateData {
+  showNewItem: boolean;
+  isFolder: boolean;
+}
 
 const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   const { name, children, path, id } = item;
 
+  const [showInput, setShowInput] = useState<boolean>(false);
+  const [createData, setCreateData] = useState<CreateData>({
+    showNewItem: false,
+    isFolder: false,
+  });
   const [expandedFolders, setExpandedFolders] = useLocalStorage<string[]>(
     "expanded-folders",
     []
@@ -32,20 +43,33 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
       setExpandedFolders([...expandedFolders, id]);
     }
   };
+  const expandFolder = () => {
+    if (!isExpanded) {
+      setExpandedFolders([...expandedFolders, id]);
+    }
+  };
 
   const sortedChildren = [...(children || [])].sort((a) => {
     return a.isFolder ? -1 : 1;
   });
 
-  const onAdd = (e: React.MouseEvent, isFolder = true) => {
+  const onAddClick = (e: React.MouseEvent, isFolder = true) => {
     e.stopPropagation();
-    const itemName = prompt("Enter item name");
+    expandFolder();
+    setCreateData({
+      showNewItem: true,
+      isFolder,
+    });
+  };
+
+  const onAdd = (value: string) => {
+    const defaultName = new Date().toLocaleString();
     const newItem = {
       id: uuidv4(),
-      name: itemName || new Date().getTime().toString(),
-      isFolder,
+      name: value || defaultName,
+      isFolder: createData.isFolder,
     };
-    if (!isFolder) {
+    if (!createData.isFolder) {
       db.sketches.add({
         fileId: newItem.id,
         path: [...(path || []), id],
@@ -57,14 +81,23 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
       });
     }
     addItem(item.id, newItem);
+    setCreateData((prev) => ({ ...prev, showNewItem: false }));
+  };
+  const onNewItemCancel = () => {
+    setCreateData((prev) => ({ ...prev, showNewItem: false }));
+  };
+  const onEditCancel = () => {
+    setShowInput(false);
   };
 
-  const onEdit = (e: React.MouseEvent) => {
+  const onEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const itemName = prompt("Enter item name", name);
-    editItem(item.id, { name: itemName || name });
+    setShowInput(true);
   };
-
+  const onNameChange = (value: string) => {
+    setShowInput(false);
+    editItem(id, { name: value || name });
+  };
   const onRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
     db.sketches.where("path").anyOf(id).delete();
@@ -78,16 +111,33 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
           <div className={s.icon}>
             {isExpanded ? <FaFolderOpen /> : <FaFolder />}
           </div>
-          <span>{name}</span>
+          {showInput ? (
+            <NameInput
+              onNameChange={onNameChange}
+              onCancel={onEditCancel}
+              defaultValue={name}
+            />
+          ) : (
+            <span>{name}</span>
+          )}
         </div>
         <div className={s.actions}>
-          <AddFolderIcon onClick={onAdd} />
-          <AddFileIcon onClick={(e) => onAdd(e, false)} />
-          <EditIcon onClick={onEdit} />
+          <AddFolderIcon onClick={onAddClick} />
+          <AddFileIcon onClick={(e) => onAddClick(e, false)} />
+          <EditIcon onClick={onEditClick} />
           <RemoveIcon onClick={onRemove} />
         </div>
       </div>
       <div className={`${isExpanded ? s.expanded : s.collapsed}`}>
+        {createData.showNewItem && (
+          <div className={s.newItem}>
+            <NameInput
+              onNameChange={onAdd}
+              onCancel={onNewItemCancel}
+              defaultValue={""}
+            />
+          </div>
+        )}
         {sortedChildren.map((item) => {
           return (
             <FileStorageItem
