@@ -19,6 +19,8 @@ export interface SketchData {
 
 export interface Sketch {
   fileId: string;
+  name: string;
   path: string[];
   data: SketchData;
+  lastModified: number;
 }

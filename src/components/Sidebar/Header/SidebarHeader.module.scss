@@ -1,0 +1,15 @@
+.sidebarHeader {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-height: 20px;
+  padding: 4px;
+  width: 100%;
+  background-color: var(--background-secondary);
+
+  a {
+    text-decoration: none;
+    color: currentColor;
+  }
+}

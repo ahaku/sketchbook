@@ -2,4 +2,33 @@
   height: 100%;
   display: grid;
   place-items: center;
+
+  .recent {
+    min-width: 310px;
+    min-height: 300px;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    color: inherit;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .file {
+      transition: color 0.1s ease-in-out;
+
+      &:hover {
+        color: var(--text-hover);
+      }
+    }
+  }
+
+  .loadingWrapper {
+    display: grid;
+    place-items: center;
+    min-width: 310px;
+    min-height: 300px;
+  }
 }

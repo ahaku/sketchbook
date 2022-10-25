@@ -34,8 +34,10 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
     navigate(`/${id}`);
   };
   const onNameChange = (value: string) => {
+    const patch = { name: value || name };
     setShowInput(false);
-    editItem(id, { name: value || name });
+    editItem(id, patch);
+    db.sketches.where("fileId").equals(id).modify(patch);
   };
   const onCancel = () => {
     setShowInput(false);

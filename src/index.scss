@@ -12,6 +12,7 @@ body {
   -khtml-user-select: none;
   -ms-user-select: none;
 }
+
 body,
 html,
 #root {
@@ -19,10 +20,12 @@ html,
   height: 100%;
   --item-padding: 10px;
 }
+
 body[data-theme="light"] {
   --primary: #212121;
   --text-hover: #313131;
   --background: white;
+  --background-secondary: #ccc;
   --sidebar-background: #cccccce3;
   --sidebar-button: rgb(156, 156, 156);
   --input-outline-color: #ccc;
@@ -34,12 +37,14 @@ body[data-theme="dark"] {
   --primary: rgb(221, 221, 221);
   --text-hover: white;
   --background: #212121;
+  --background-secondary: #262626;
   --sidebar-background: #333333e3;
   --sidebar-button: #1d1d1d;
   --input-outline-color: rgb(81, 154, 238);
   --scrollbar-thumb-color: #212121;
   --scrollbar-track-color: #333333e3;
 }
+
 body {
   color: var(--primary);
   background-color: var(--background);

@@ -72,12 +72,14 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
     if (!createData.isFolder) {
       db.sketches.add({
         fileId: newItem.id,
+        name: newItem.name,
         path: [...(path || []), id],
         data: {
           elements: [],
           appState: {},
           files: {},
         },
+        lastModified: Date.now(),
       });
     }
     addItem(item.id, newItem);

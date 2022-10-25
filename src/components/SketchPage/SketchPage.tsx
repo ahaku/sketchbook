@@ -48,6 +48,7 @@ const SketchPage = () => {
             appState: dataRef.current.appState,
             files: dataRef.current.files,
           },
+          lastModified: Date.now(),
         });
   }, [sketchId]);
 
@@ -92,6 +93,7 @@ const SketchPage = () => {
           onLibraryChange={(items) => {
             setLibraryItems(items);
           }}
+          name={sketch?.name || ""}
           // onPointerUpdate={(payload) => console.log(payload)}
           // viewModeEnabled={viewModeEnabled}
           // zenModeEnabled={zenModeEnabled}
