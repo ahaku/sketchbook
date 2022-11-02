@@ -12,7 +12,7 @@ const Sidebar = () => {
       <FileStorage />
 
       <div className={s.sidebarToggle} onClick={() => setExpanded(!expanded)}>
-        <span>{expanded ? "HIDE" : "FILES"}</span>
+        <span>{expanded ? "HIDE" : "SKETCHES"}</span>
       </div>
     </div>
   );

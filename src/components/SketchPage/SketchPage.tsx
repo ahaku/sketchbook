@@ -31,11 +31,6 @@ const SketchPage = () => {
     return result;
   }, [sketchId]);
 
-  useEffect(() => {
-    if (!loading && sketch) {
-    }
-  }, [loading, sketch]);
-
   const saveDataToDb = useCallback(() => {
     sketchId &&
       dataRef &&
@@ -68,11 +63,11 @@ const SketchPage = () => {
   }, [sketchId]);
 
   if (loading) {
-    return <div className={s.sketchPage}>Loading...</div>;
+    return <div className={s.noData}>Loading...</div>;
   }
 
-  if (!sketch && !loading) {
-    return <div className={s.sketchPage}>Unable to find</div>;
+  if (!loading && !sketch) {
+    return <div className={s.noData}>Unable to find</div>;
   }
 
   return (

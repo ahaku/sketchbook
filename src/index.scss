@@ -31,6 +31,12 @@ body[data-theme="light"] {
   --input-outline-color: #ccc;
   --scrollbar-thumb-color: darkgray;
   --scrollbar-track-color: white;
+  --gradient-background: linear-gradient(
+    90deg,
+    rgba(189, 189, 189, 0) 0%,
+    rgba(189, 189, 189, 0.92) 25%,
+    rgb(189, 189, 189) 100%
+  );
 }
 
 body[data-theme="dark"] {
@@ -43,6 +49,12 @@ body[data-theme="dark"] {
   --input-outline-color: rgb(81, 154, 238);
   --scrollbar-thumb-color: #212121;
   --scrollbar-track-color: #333333e3;
+  --gradient-background: linear-gradient(
+    90deg,
+    rgba(21, 21, 21, 0) 0%,
+    rgba(21, 21, 21, 0.92) 25%,
+    rgb(21, 21, 21) 100%
+  );
 }
 
 body {

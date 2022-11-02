@@ -4,9 +4,9 @@ import { StorageItem } from "../../../../types";
 import { BsCardImage } from "react-icons/bs";
 import s from "./File.module.scss";
 import EditIcon from "../../../common/EditIcon";
-import RemoveIcon from "../../../common/RemoveIcon";
 import { useState } from "react";
 import NameInput from "../../../common/NameInput";
+import RemoveButton from "../../../common/RemoveButton";
 
 interface FileProps {
   item: StorageItem;
@@ -27,7 +27,13 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   };
   const onRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
-    db.sketches.where("fileId").equals(id).delete();
+    db.sketches
+      .where("fileId")
+      .equals(id)
+      .delete()
+      .then(() => {
+        active && navigate("/");
+      });
     removeItem(id);
   };
   const onClick = () => {
@@ -63,7 +69,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
       </div>
       <div className={s.actions}>
         <EditIcon onClick={onEditClick} />
-        <RemoveIcon onClick={onRemove} />
+        <RemoveButton onConfirm={onRemove} />
       </div>
     </div>
   );

@@ -5,12 +5,12 @@ import { StorageItem } from "../../../../types";
 import FileStorageItem from "../FileStorageItem";
 import s from "./Folder.module.scss";
 import { FaFolderOpen, FaFolder } from "react-icons/fa";
-import RemoveIcon from "../../../common/RemoveIcon";
 import EditIcon from "../../../common/EditIcon";
 import AddFileIcon from "../../../common/AddFileIcon";
 import AddFolderIcon from "../../../common/AddFolderIcon";
 import { useState } from "react";
 import NameInput from "../../../common/NameInput";
+import RemoveButton from "../../../common/RemoveButton";
 
 interface FolderProps {
   item: StorageItem;
@@ -127,7 +127,7 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
           <AddFolderIcon onClick={onAddClick} />
           <AddFileIcon onClick={(e) => onAddClick(e, false)} />
           <EditIcon onClick={onEditClick} />
-          <RemoveIcon onClick={onRemove} />
+          <RemoveButton onConfirm={onRemove} />
         </div>
       </div>
       <div className={`${isExpanded ? s.expanded : s.collapsed}`}>
