@@ -4,25 +4,25 @@
   display: flex;
   flex-basis: 100%;
   justify-content: space-between;
+  height: var(--item-height);
 
   .header {
     display: flex;
     flex: 1;
-    .icon {
-      margin-right: 4px;
-      display: flex;
-      align-items: center;
-    }
-  }
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+    height: 100%;
 
-  .name {
-    flex: 1;
-    a {
-      text-decoration: none;
-      color: inherit;
+    svg {
+      min-width: 20px;
+      margin-right: 4px;
     }
-    &.active {
-      text-decoration: underline;
+    span {
+      padding-bottom: 4px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 

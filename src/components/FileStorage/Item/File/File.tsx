@@ -40,7 +40,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
     navigate(`/${id}`);
   };
   const onNameChange = (value: string) => {
-    const patch = { name: value || name };
+    const patch = { name: value.trim() || name };
     setShowInput(false);
     editItem(id, patch);
     db.sketches.where("fileId").equals(id).modify(patch);
@@ -52,20 +52,17 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   return (
     <div onClick={onClick} className={s.file}>
       <div className={s.header}>
-        <div className={s.icon}>
-          <BsCardImage />
-        </div>
-        <div className={`${s.name} ${active ? s.active : ""}`}>
-          {showInput ? (
-            <NameInput
-              onNameChange={onNameChange}
-              onCancel={onCancel}
-              defaultValue={name}
-            />
-          ) : (
-            name
-          )}
-        </div>
+        <BsCardImage />
+
+        {showInput ? (
+          <NameInput
+            onNameChange={onNameChange}
+            onCancel={onCancel}
+            defaultValue={name}
+          />
+        ) : (
+          <span>{name}</span>
+        )}
       </div>
       <div className={s.actions}>
         <EditIcon onClick={onEditClick} />

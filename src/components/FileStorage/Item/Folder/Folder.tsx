@@ -98,7 +98,7 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   };
   const onNameChange = (value: string) => {
     setShowInput(false);
-    editItem(id, { name: value || name });
+    editItem(id, { name: value.trim() || name });
   };
   const onRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -110,9 +110,7 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
     <div className={s.folder}>
       <div onClick={toggleFolderExpand} className={s.header}>
         <div className={s.info}>
-          <div className={s.icon}>
-            {isExpanded ? <FaFolderOpen /> : <FaFolder />}
-          </div>
+          {isExpanded ? <FaFolderOpen /> : <FaFolder />}
           {showInput ? (
             <NameInput
               onNameChange={onNameChange}

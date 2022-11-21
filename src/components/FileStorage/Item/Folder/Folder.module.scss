@@ -4,15 +4,25 @@
   .header {
     display: flex;
     justify-content: space-between;
+    height: var(--item-height);
 
     .info {
       display: flex;
       flex: 1;
-      height: 20px;
-      .icon {
-        display: flex;
+      align-items: center;
+      align-content: center;
+      overflow: hidden;
+      height: 100%;
+
+      svg {
+        min-width: 20px;
         margin-right: 4px;
-        align-items: flex-end;
+      }
+      span {
+        padding-bottom: 4px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
 

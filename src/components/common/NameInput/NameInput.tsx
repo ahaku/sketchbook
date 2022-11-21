@@ -42,6 +42,7 @@ const NameInput = ({ onNameChange, onCancel, defaultValue }: Props) => {
       onBlur={onBlur}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
+      maxLength={100}
     />
   );
 };

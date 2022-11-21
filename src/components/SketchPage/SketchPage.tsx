@@ -31,6 +31,16 @@ const SketchPage = () => {
     return result;
   }, [sketchId]);
 
+  useEffect(() => {
+    if (sketch?.name) {
+      document.title = "Sketchbook | " + sketch.name;
+    }
+
+    return () => {
+      document.title = "Sketchbook";
+    };
+  }, [sketch]);
+
   const saveDataToDb = useCallback(() => {
     sketchId &&
       dataRef &&

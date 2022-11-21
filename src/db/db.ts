@@ -48,6 +48,8 @@ export class Database extends Dexie {
           appState: {},
           files: {},
         },
+        name: "example.sketch",
+        lastModified: Date.now(),
       });
     });
   }
