@@ -7,9 +7,10 @@ import s from "./RemoveButton.module.scss";
 
 interface Props {
   onConfirm: (e: React.MouseEvent) => void;
+  confirmText?: string;
 }
 
-const RemoveButton = ({ onConfirm }: Props) => {
+const RemoveButton = ({ onConfirm, confirmText = "Delete ?" }: Props) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,7 +35,7 @@ const RemoveButton = ({ onConfirm }: Props) => {
       <RemoveIcon onClick={onClickHandler} />
       {showConfirm && (
         <div className={s.confirmWrapper} ref={ref}>
-          <span>Delete ?</span>
+          <span>{confirmText}</span>
           <BiCheck size={24} onClick={onConfirm} />
           <IoCloseSharp size={22} onClick={closeConfirm} />
         </div>

@@ -24,7 +24,7 @@ export class Database extends Dexie {
         [
           {
             id: folderId,
-            name: "root",
+            name: "Sketches",
             isFolder: true,
             path: [],
             children: [

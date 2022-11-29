@@ -61,7 +61,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
             defaultValue={name}
           />
         ) : (
-          <span>{name}</span>
+          <span data-active={active}>{name}</span>
         )}
       </div>
       <div className={s.actions}>

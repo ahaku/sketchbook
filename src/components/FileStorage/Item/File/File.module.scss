@@ -23,6 +23,10 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+
+      &[data-active="true"] {
+        text-decoration: underline;
+      }
     }
   }
 

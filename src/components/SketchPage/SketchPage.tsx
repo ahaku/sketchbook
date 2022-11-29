@@ -1,13 +1,14 @@
-import { useLiveQuery } from "dexie-react-hooks";
 import { useParams } from "react-router-dom";
 import s from "./SketchPage.module.scss";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import db from "../../db";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SketchData } from "../../types";
+import { Sketch, SketchData } from "../../types";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { LibraryItems } from "@excalidraw/excalidraw/types/types";
 import { useLocalStorage } from "../../hooks";
+
+const DEBOUNCE_TIME = 1000;
 
 const SketchPage = () => {
   const { sketchId } = useParams();
@@ -16,20 +17,17 @@ const SketchPage = () => {
     "library-items",
     []
   );
+  const [sketch, setSketch] = useState<Sketch | undefined>(undefined);
+  const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const excalidrawRef = useRef(null);
   const dataRef = useRef<SketchData>({ elements: [], appState: {}, files: {} });
-  const sketch = useLiveQuery(async () => {
+
+  const resetData = () => {
+    setSketch(undefined);
     setLoading(true);
-    const result = await db.sketches
-      .where("fileId")
-      .equals(sketchId || "")
-      .first();
-
-    setLoading(false);
-
-    return result;
-  }, [sketchId]);
+    dataRef.current = { elements: [], appState: {}, files: {} };
+  };
 
   useEffect(() => {
     if (sketch?.name) {
@@ -57,6 +55,13 @@ const SketchPage = () => {
         });
   }, [sketchId]);
 
+  const debouncedSave = useCallback(() => {
+    debounceRef.current && clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      saveDataToDb();
+    }, DEBOUNCE_TIME);
+  }, [saveDataToDb]);
+
   useEffect(() => {
     window.addEventListener("beforeunload", saveDataToDb);
     return () => {
@@ -65,9 +70,28 @@ const SketchPage = () => {
   }, [saveDataToDb]);
 
   useEffect(() => {
+    const getSketch = async () => {
+      try {
+        const result = await db.sketches
+          .where("fileId")
+          .equals(sketchId || "")
+          .first();
+
+        setSketch(result);
+      } catch (error) {
+        console.error(error);
+        setSketch(undefined);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getSketch();
+
     return () => {
       // save sketch on unmount
       dataRef.current?.elements.length && saveDataToDb();
+      resetData();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sketchId]);
@@ -94,6 +118,7 @@ const SketchPage = () => {
           }}
           onChange={(elements, state, files) => {
             dataRef.current = { elements, appState: state, files };
+            debouncedSave();
           }}
           onLibraryChange={(items) => {
             setLibraryItems(items);
