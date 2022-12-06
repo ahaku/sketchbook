@@ -5,6 +5,8 @@
   flex-basis: 100%;
   justify-content: space-between;
   height: var(--item-height);
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
 
   .header {
     display: flex;
@@ -23,19 +25,42 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-
-      &[data-active="true"] {
-        text-decoration: underline;
-      }
     }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 200%;
+    height: 100%;
+    transition: inherit;
   }
 
   &:hover {
     cursor: pointer;
     color: var(--text-hover);
+    background-color: var(--storage-item-hover);
     .actions {
       visibility: visible;
       opacity: 1;
+    }
+
+    &::before {
+      background-color: var(--storage-item-hover);
+    }
+  }
+
+  &[data-active="true"] {
+    background-color: var(--storage-item-active);
+    &::before {
+      background-color: var(--storage-item-active);
+    }
+    .header {
+      span {
+        text-decoration: underline;
+      }
     }
   }
 

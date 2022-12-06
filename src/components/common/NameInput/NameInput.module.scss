@@ -1,5 +1,5 @@
 .nameInput {
-  background: transparent;
+  background: var(--storage-item-input-bg);
   border: none;
   outline: 1px solid var(--input-outline-color);
   box-shadow: 0 0 4px var(--input-outline-color);

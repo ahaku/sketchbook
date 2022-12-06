@@ -50,7 +50,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
   };
 
   return (
-    <div onClick={onClick} className={s.file}>
+    <div data-active={active} onClick={onClick} className={s.file}>
       <div className={s.header}>
         <BsCardImage />
 
@@ -61,7 +61,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
             defaultValue={name}
           />
         ) : (
-          <span data-active={active}>{name}</span>
+          <span>{name}</span>
         )}
       </div>
       <div className={s.actions}>
