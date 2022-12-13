@@ -26,21 +26,21 @@ body[data-theme="light"] {
   --primary: #212121;
   --text-hover: #313131;
   --background: white;
-  --background-secondary: #ccc;
-  --sidebar-background: #cccccce3;
-  --sidebar-button: rgb(156, 156, 156);
-  --input-outline-color: #ccc;
-  --scrollbar-thumb-color: darkgray;
+  --background-secondary: rgb(176, 190, 201);
+  --sidebar-background: #f0f3f7e3;
+  --sidebar-button: #ced4da;
+  --input-outline-color: rgb(45, 112, 151);
+  --scrollbar-thumb-color: rgb(193, 198, 204);
   --scrollbar-track-color: white;
   --gradient-background: linear-gradient(
     90deg,
-    rgba(189, 189, 189, 0) 0%,
-    rgba(189, 189, 189, 0.92) 25%,
-    rgb(189, 189, 189) 100%
+    rgba(174, 206, 221, 0) 0%,
+    rgba(174, 206, 221, 0.92) 25%,
+    rgb(174, 206, 221) 100%
   );
-  --storage-item-hover: #e6e6e6b0;
-  --storage-item-active: #e6e6e6;
-  --storage-item-input-bg: #b2b0b8;
+  --storage-item-hover: #d9e2f0b0;
+  --storage-item-active: #d9e2f0;
+  --storage-item-input-bg: #cee2e9;
 }
 
 body[data-theme="dark"] {
