@@ -36,12 +36,16 @@ const HomePage = () => {
     <div className={s.home}>
       {status === Statuses.SUCCESS ? (
         <div className={s.recent}>
-          <h3>Recent Sketches</h3>
-          {sortedSketches?.map((sketch) => (
-            <div key={sketch.fileId} className={s.file}>
-              <a href={`/${sketch.fileId}`}>{sketch.name || sketch.fileId}</a>
-            </div>
-          ))}
+          <h2>Recent Sketches</h2>
+          {sortedSketches && sortedSketches.length > 0 ? (
+            sortedSketches.map((sketch) => (
+              <div key={sketch.fileId} className={s.file}>
+                <a href={`/${sketch.fileId}`}>{sketch.name || sketch.fileId}</a>
+              </div>
+            ))
+          ) : (
+            <span>There's nothing to show here</span>
+          )}
         </div>
       ) : status === Statuses.LOADING ? (
         <div className={s.loadingWrapper}>
