@@ -1,0 +1,14 @@
+.sketchPage {
+  display: grid;
+  place-items: end;
+  height: 100%;
+  .excalidraWrapper {
+    width: calc(100% - 18px);
+    height: 100%;
+  }
+}
+.noData {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}

@@ -1,6 +1,46 @@
 .sidebar {
-  width: 40%; // todo: make this dynamic
+  --sidebar-width: 20%;
+  min-width: 100px;
+  width: var(--sidebar-width);
   height: 100%;
   background-color: var(--sidebar-background);
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  transition: left 0.2s ease-in-out;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+
+  &.expanded {
+    left: 0;
+  }
+
+  &.collapsed {
+    left: calc(-1 * var(--sidebar-width));
+  }
+}
+
+.sidebarToggle {
+  cursor: pointer;
+  position: absolute;
+  right: -18px;
+  width: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: var(--sidebar-button);
+  transition: opacity 0.2s ease-in-out;
+  height: 100%;
+
+  span {
+    pointer-events: none;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

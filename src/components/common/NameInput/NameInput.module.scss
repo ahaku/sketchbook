@@ -1,0 +1,10 @@
+.nameInput {
+  background: var(--storage-item-input-bg);
+  border: none;
+  outline: 1px solid var(--input-outline-color);
+  box-shadow: 0 0 4px var(--input-outline-color);
+  width: calc(90% - 4px);
+  color: inherit;
+  height: calc(100% - 4px);
+  font-size: 0.9rem;
+}

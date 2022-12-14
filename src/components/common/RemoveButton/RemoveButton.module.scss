@@ -1,0 +1,21 @@
+.removeButton {
+  position: relative;
+  display: flex;
+  isolation: isolate;
+
+  .confirmWrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: var(--gradient-background);
+    width: 130px;
+    right: -4px;
+    bottom: -4px;
+
+    span {
+      margin-right: 6px;
+      margin-bottom: 2px;
+    }
+  }
+}

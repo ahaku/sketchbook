@@ -1,4 +1,72 @@
 .file {
-  padding-left: 10px;
+  padding-left: var(--item-padding);
   font-weight: normal;
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  height: var(--item-height);
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+
+  .header {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+    height: 100%;
+
+    svg {
+      min-width: 20px;
+      margin-right: 4px;
+    }
+    span {
+      padding-bottom: 4px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 200%;
+    height: 100%;
+    transition: inherit;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: var(--text-hover);
+    background-color: var(--storage-item-hover);
+    .actions {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &::before {
+      background-color: var(--storage-item-hover);
+    }
+  }
+
+  &[data-active="true"] {
+    background-color: var(--storage-item-active);
+    &::before {
+      background-color: var(--storage-item-active);
+    }
+  }
+
+  .actions {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0px 4px 0px 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
 }

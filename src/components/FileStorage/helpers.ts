@@ -7,7 +7,16 @@ export const add = (
 ): StorageItem[] => {
   return items.map((item) => {
     if (item.id === parentId) {
-      return { ...item, children: [...(item.children || []), itemToAdd] };
+      return {
+        ...item,
+        children: [
+          ...(item.children || []),
+          {
+            ...itemToAdd,
+            path: [...(item?.path || []), item.id],
+          },
+        ],
+      };
     }
 
     if (Array.isArray(item.children)) {

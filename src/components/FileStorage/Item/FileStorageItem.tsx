@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { StorageItem } from "../../../types";
 import File from "./File";
 import Folder from "./Folder";
@@ -16,21 +15,15 @@ const FileStorageItem = ({
   editItem,
   removeItem,
 }: FileStorageItemProps) => {
-  const { name, isFolder, id } = item;
-  const [expanded, setExpanded] = useState(false);
-  const toggleExpand = () => {
-    setExpanded((prev) => !prev);
-  };
+  const { isFolder } = item;
 
   if (!isFolder) {
-    return <File item={item} />;
+    return <File item={item} editItem={editItem} removeItem={removeItem} />;
   }
 
   return (
     <Folder
       item={item}
-      expanded={expanded}
-      toggleExpand={toggleExpand}
       addItem={addItem}
       editItem={editItem}
       removeItem={removeItem}
