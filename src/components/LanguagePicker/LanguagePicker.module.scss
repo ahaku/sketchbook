@@ -1,0 +1,8 @@
+.languagePicker {
+  color: var(--primary);
+  background-color: var(--background-secondary);
+
+  &:hover {
+    cursor: pointer;
+  }
+}

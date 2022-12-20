@@ -7,12 +7,14 @@ import { Sketch, SketchData } from "../../types";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { LibraryItems } from "@excalidraw/excalidraw/types/types";
 import { useLocalStorage } from "../../hooks";
+import { useLanguageContext } from "../../language/LanguageContext";
 
 const DEBOUNCE_TIME = 1000;
 
 const SketchPage = () => {
   const { sketchId } = useParams();
   const { theme } = useThemeContext();
+  const { langCode } = useLanguageContext();
   const [libraryItems, setLibraryItems] = useLocalStorage<LibraryItems>(
     "library-items",
     []
@@ -38,6 +40,10 @@ const SketchPage = () => {
       document.title = "Sketchbook";
     };
   }, [sketch]);
+
+  useEffect(() => {
+    document.documentElement.lang = langCode;
+  }, [langCode]);
 
   const saveDataToDb = useCallback(() => {
     sketchId &&
@@ -124,10 +130,7 @@ const SketchPage = () => {
             setLibraryItems(items);
           }}
           name={sketch?.name || ""}
-          // onPointerUpdate={(payload) => console.log(payload)}
-          // viewModeEnabled={viewModeEnabled}
-          // zenModeEnabled={zenModeEnabled}
-          // gridModeEnabled={gridModeEnabled}
+          langCode={langCode}
         />
       </div>
     </div>
