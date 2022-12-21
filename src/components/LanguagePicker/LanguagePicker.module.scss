@@ -1,0 +1,11 @@
+.languagePicker {
+  color: var(--primary);
+  background-color: var(--background-secondary);
+  border-radius: 2px;
+  border: 1px solid var(--storage-item-input-bg);
+  outline: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -40,7 +40,6 @@
 
   &:hover {
     cursor: pointer;
-    color: var(--text-hover);
     background-color: var(--storage-item-hover);
     .actions {
       visibility: visible;

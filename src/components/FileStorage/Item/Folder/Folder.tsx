@@ -11,7 +11,6 @@ import AddFolderIcon from "../../../common/AddFolderIcon";
 import { useState } from "react";
 import NameInput from "../../../common/NameInput";
 import RemoveButton from "../../../common/RemoveButton";
-import { useNavigate } from "react-router-dom";
 
 interface FolderProps {
   item: StorageItem;
@@ -28,7 +27,6 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   const { name, children, path, id } = item;
   const isRoot = Array.isArray(path) && path.length === 0;
 
-  const navigate = useNavigate();
   const [showInput, setShowInput] = useState<boolean>(false);
   const [createData, setCreateData] = useState<CreateData>({
     showNewItem: false,
