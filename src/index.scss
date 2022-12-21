@@ -41,6 +41,7 @@ body[data-theme="light"] {
   --storage-item-hover: #d9e2f0b0;
   --storage-item-active: #d9e2f0;
   --storage-item-input-bg: #cee2e9;
+  --spinner-color: #212121;
 }
 
 body[data-theme="dark"] {
@@ -62,6 +63,7 @@ body[data-theme="dark"] {
   --storage-item-hover: #4443438f;
   --storage-item-active: #444343;
   --storage-item-input-bg: #5f5f5f;
+  --spinner-color: rgb(221, 221, 221);
 }
 
 body {

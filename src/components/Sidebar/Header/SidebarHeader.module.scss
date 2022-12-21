@@ -3,14 +3,26 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  min-height: 20px;
+  min-height: 28px;
   padding: 4px;
   width: 100%;
   background-color: var(--background-secondary);
   overflow: hidden;
 
+  %flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .homeBtn {
+    @extend %flexCenter;
+  }
+
   a {
     text-decoration: none;
     color: currentColor;
+    @extend %flexCenter;
   }
 }
