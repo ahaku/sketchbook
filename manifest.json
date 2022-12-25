@@ -1,0 +1,27 @@
+{
+  "short_name": "Sketchbook",
+  "name": "Excalidraw Sketchbook",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "fullscreen",
+  "theme_color": "#212121",
+  "background_color": "#ffffff",
+  "description": "Multi sketch Excalidraw"
+}
