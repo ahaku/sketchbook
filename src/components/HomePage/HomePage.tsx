@@ -40,8 +40,8 @@ const HomePage = () => {
           <h2>Recent Sketches</h2>
           {sortedSketches && sortedSketches.length > 0 ? (
             sortedSketches.map((sketch) => (
-              <Link to={`/${sketch.fileId}`}>
-                <div key={sketch.fileId} className={s.file}>
+              <Link to={`/${sketch.fileId}`} key={sketch.fileId}>
+                <div className={s.file}>
                   <span>{sketch.name || sketch.fileId}</span>
                 </div>
               </Link>

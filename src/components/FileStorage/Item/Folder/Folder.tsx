@@ -109,7 +109,7 @@ const Folder = ({ item, addItem, editItem, removeItem }: FolderProps) => {
   const onDropDb = (e: React.MouseEvent) => {
     e.stopPropagation();
     db.delete().then(() => {
-      window.location.href = "/";
+      window.location.href = "/sketchbook/";
       localStorage.setItem("expanded-folders", "[]");
     });
   };
