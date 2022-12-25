@@ -1,5 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import db from "../../db";
 import { Statuses } from "../../types/enums";
 import LoadingText from "../common/LoadingText";
@@ -39,9 +40,11 @@ const HomePage = () => {
           <h2>Recent Sketches</h2>
           {sortedSketches && sortedSketches.length > 0 ? (
             sortedSketches.map((sketch) => (
-              <div key={sketch.fileId} className={s.file}>
-                <a href={`/${sketch.fileId}`}>{sketch.name || sketch.fileId}</a>
-              </div>
+              <Link to={`/${sketch.fileId}`}>
+                <div key={sketch.fileId} className={s.file}>
+                  <span>{sketch.name || sketch.fileId}</span>
+                </div>
+              </Link>
             ))
           ) : (
             <span>There's nothing to show here</span>
