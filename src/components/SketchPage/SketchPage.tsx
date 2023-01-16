@@ -47,7 +47,7 @@ const SketchPage = () => {
 
   const saveDataToDb = useCallback(() => {
     sketchId &&
-      dataRef &&
+      dataRef.current.elements?.length > 0 &&
       db.sketches
         .where("fileId")
         .equals(sketchId)
