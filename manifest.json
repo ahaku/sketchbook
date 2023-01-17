@@ -8,6 +8,18 @@
       "type": "image/x-icon"
     },
     {
+      "src": "96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any maskable"
+    },
+    {
       "src": "192.png",
       "type": "image/png",
       "sizes": "192x192",
@@ -16,7 +28,8 @@
     {
       "src": "512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
