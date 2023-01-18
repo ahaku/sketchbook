@@ -20,15 +20,15 @@
       "purpose": "any maskable"
     },
     {
-      "src": "256.png",
+      "src": "150.png",
       "type": "image/png",
-      "sizes": "256x256",
+      "sizes": "150x150",
       "purpose": "any maskable"
     },
     {
-      "src": "192.png",
+      "src": "256.png",
       "type": "image/png",
-      "sizes": "192x192",
+      "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
