@@ -4,8 +4,14 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any maskable"
     },
     {
       "src": "96.png",
@@ -14,9 +20,9 @@
       "purpose": "any maskable"
     },
     {
-      "src": "128.png",
+      "src": "256.png",
       "type": "image/png",
-      "sizes": "128x128",
+      "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
@@ -34,7 +40,7 @@
   ],
   "start_url": ".",
   "display": "fullscreen",
-  "theme_color": "#212121",
+  "theme_color": "#1d1d1d",
   "background_color": "#ffffff",
   "description": "Multi sketch Excalidraw"
 }
