@@ -1,12 +1,24 @@
-import { useLocalStorage } from "../../hooks";
+import { useRef, useState } from "react";
+import { useClickOutside } from "../../hooks";
 import FileStorage from "../FileStorage";
 import SidebarHeader from "./Header";
 import s from "./Sidebar.module.scss";
 
 const Sidebar = () => {
-  const [expanded, setExpanded] = useLocalStorage("sidebar-expanded", true);
+  const ref = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+
+  const onOutsideClick = () => {
+    setExpanded(false);
+  };
+
+  useClickOutside(ref, onOutsideClick);
+
   return (
-    <div className={`${s.sidebar} ${expanded ? s.expanded : s.collapsed}`}>
+    <div
+      ref={ref}
+      className={`${s.sidebar} ${expanded ? s.expanded : s.collapsed}`}
+    >
       <SidebarHeader />
 
       <FileStorage />
