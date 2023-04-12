@@ -4,6 +4,7 @@ import { ThemeProvider } from "../../theme/ThemeContext";
 import HomePage from "../HomePage";
 import Sidebar from "../Sidebar";
 import SketchPage from "../SketchPage";
+import { Paths as P } from "../../paths";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
         <>
           <Sidebar />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/:sketchId" element={<SketchPage />} />
+            <Route path={P.home} element={<HomePage />} />
+            <Route path={P.sketchId} element={<SketchPage />} />
           </Routes>
         </>
       </LanguageProvider>

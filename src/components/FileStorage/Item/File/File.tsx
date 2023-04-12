@@ -7,6 +7,7 @@ import EditIcon from "../../../common/EditIcon";
 import { useState } from "react";
 import NameInput from "../../../common/NameInput";
 import RemoveButton from "../../../common/RemoveButton";
+import { Paths as P } from "../../../../paths";
 
 interface FileProps {
   item: StorageItem;
@@ -32,7 +33,7 @@ const File = ({ item, editItem, removeItem }: FileProps) => {
       .equals(id)
       .delete()
       .then(() => {
-        active && navigate("/");
+        active && navigate(P.home);
       });
     removeItem(id);
   };

@@ -1,3 +1,5 @@
+@import "../../../styles/common.scss";
+
 .sidebarHeader {
   position: fixed;
   display: flex;
@@ -8,17 +10,6 @@
   width: 100%;
   background-color: var(--background-secondary);
   overflow: hidden;
-
-  %flexCenter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-  }
-
-  .homeBtn {
-    @extend %flexCenter;
-  }
 
   a {
     text-decoration: none;
